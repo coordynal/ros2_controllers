@@ -50,7 +50,7 @@ namespace swerve_drive_controller {
         : velocity_(velocity), feedback_(feedback), name_(std::move(name)) {}
 
     void Wheel::set_velocity(double velocity) {
-        velocity_.get().set_value(velocity);
+        (void)velocity_.get().set_value(velocity);
     }
 
     double Wheel::get_feedback() {
@@ -63,7 +63,7 @@ namespace swerve_drive_controller {
         : position_(position), feedback_(feedback), name_(std::move(name)) {}
 
     void Axle::set_position(double position) {
-        position_.get().set_value(position);
+        (void)position_.get().set_value(position);
     }
 
     double Axle::get_feedback() {
@@ -212,7 +212,8 @@ namespace swerve_drive_controller {
             if (tf_prefix == "/") {
                 tf_prefix = "";
             } else {
-                // this is to fix the case when the namespace starts with a '/', which can cause issues with tf frame names
+                // this is to fix the case when the namespace starts with a '/', which can cause
+                // issues with tf frame names
                 tf_prefix.erase(0, 1);
                 tf_prefix += "/";
             }
